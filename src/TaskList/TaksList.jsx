@@ -12,10 +12,25 @@ export default function TaskList(){
         }
     }
 
+    function upTask(index){
+        if(index > 0){
+            const updatedTasks = [...tasks];
+            [updatedTasks[index-1], updatedTasks[index]] = [updatedTasks[index], updatedTasks[index-1]];
+            setTasks(updatedTasks);
+        }
+    }
+
+    function downTask(index){
+        if(index < tasks.length - 1){
+            const updatedTasks = [...tasks];
+            [updatedTasks[index+1], updatedTasks[index]] = [updatedTasks[index], updatedTasks[index+1]];
+            setTasks(updatedTasks);
+        }
+    }
+
     return(
         <div className="tasks">
             <h1>To Do List</h1>
-            
             <div className="task-input">
                 <input type="text" 
                         placeholder="Enter a task" 
@@ -26,7 +41,7 @@ export default function TaskList(){
                 <Button onClick={addTask}>Add</Button>
             </div>
             <ul>
-                {tasks.map((task, index) => <li key={index}>{task}</li>)}
+                {tasks.map((task, index) => <li key={index}>{task}<Button onClick={() => upTask(index)} disabled={index === 0}>Up</Button><Button onClick={() => downTask(index)} disabled={index === tasks.length - 1}>Down</Button></li>)}
             </ul>
         </div>
     )
