@@ -20,14 +20,6 @@ export default function TaskList(){
         }
     }
 
-    function downTask(index){
-        if(index < tasks.length - 1){
-            const updatedTasks = [...tasks];
-            [updatedTasks[index+1], updatedTasks[index]] = [updatedTasks[index], updatedTasks[index+1]];
-            setTasks(updatedTasks);
-        }
-    }
-
     return(
         <div className="tasks">
             <h1>To Do List</h1>
